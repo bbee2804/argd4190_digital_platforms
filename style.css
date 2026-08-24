@@ -1,0 +1,28 @@
+body {
+    background-color: rgb(246, 160, 160);
+}
+h1 {
+    color:rgb(163, 33, 77);
+}
+p {
+    color: papayawhip;
+    font-family:"macha", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+
+.blue-paragraph {
+    color: rgb(214, 67, 104);
+}
+
+#biggest {
+    font-size: 80px;
+    color: rgb(163, 33, 77);
+    font-family: "Lacquer", system-ui;
+}
+
+a:hover {
+                color: rgb(235, 40, 122);
+            }
+
+
