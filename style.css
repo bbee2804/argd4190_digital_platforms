@@ -9,20 +9,26 @@ p {
     font-family:"macha", sans-serif;
 font-weight: 400;
 font-style: normal;
+margin-bottom: 30px; 
 }
+
 
 .blue-paragraph {
     color: rgb(214, 67, 104);
+    margin-bottom: 30px; 
 }
 
 #biggest {
     font-size: 80px;
-    color: rgb(163, 33, 77);
+    font-weight: bold;
+    color: rgb(201, 80, 120);
     font-family: "Lacquer", system-ui;
+    margin-bottom: 30px; 
 }
 
 a:hover {
                 color: rgb(235, 40, 122);
+                margin-bottom: 30px; 
             }
 
 
