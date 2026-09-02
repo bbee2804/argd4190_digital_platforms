@@ -1,34 +1,219 @@
+:root {
+   --fs-xl: clamp(4rem, 10vw, 9rem);
+   --fs-lg: clamp(3rem, 7vw, 6rem);
+   --fs-md: clamp(2rem, 5vw, 4rem);
+   --fs-sm: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+
 body {
-    background-color: rgb(246, 160, 160);
+   background-color: rgb(246, 160, 160);
+   margin: 0;
+   padding: 0;
 }
-h1 {
-    color:rgb(163, 33, 77);
+
+
+.header {
+   background: rgb(241, 200, 200);
+   padding: 10px 20px;
+   color: papayawhip;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 30px;
+   font-family: "Krub", sans-serif;
+   flex-direction: row;
+   flex-wrap: nowrap;
 }
-p {
-    color: papayawhip;
-    font-family:"macha", sans-serif;
-font-weight: 400;
-font-style: normal;
-margin-bottom: 30px; 
+
+
+.banner {
+   display: flex;
+   flex-direction: row;
+   gap: 25px;
+   align-items: center;
+}
+
+
+#biggest {
+   font-size: var(--fs-xl);
+   font-weight: bold;
+   font-family: "Lacquer", system-ui;
+   font-style: normal;
+   line-height: 1.1;
+   letter-spacing: 0;
+   color: rgb(201, 80, 120);
+   margin: 0;
 }
 
 
 .blue-paragraph {
-    color: rgb(214, 67, 104);
-    margin-bottom: 30px; 
+   color: rgb(214, 67, 104);
+   margin: 0;
+   text-align: left;
+   font-family: "Krub", sans-serif;
+   font-size: 1rem;
+  line-height: 1.5;
 }
 
-#biggest {
-    font-size: 80px;
-    font-weight: bold;
-    color: rgb(201, 80, 120);
-    font-family: "Lacquer", system-ui;
-    margin-bottom: 30px; 
+
+nav {
+   display: flex;
+   gap: 25px;
+   align-items: center;
+   flex-wrap: wrap;
 }
 
-a:hover {
-                color: rgb(235, 40, 122);
-                margin-bottom: 30px; 
-            }
+
+nav a {
+   color: papayawhip;
+   text-decoration: none;
+   font-family: "Krub", sans-serif;
+   font-size: 1rem;
+   font-weight: 400;
+}
 
 
+img {
+   display: block;
+   max-width: 90%;
+   height: auto;
+   margin: 0 5% 30px 5%;
+}
+
+
+.container {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: stretch;
+   flex-wrap: wrap;
+   gap: 20px;
+   border: 1px solid salmon;
+   padding: 20px;
+}
+
+
+.box {
+   background-color: rgb(241, 200, 200);
+ border: 1px dashed pink;
+   padding: 3rem;
+   flex: 1 1 180px;
+   text-align: center;
+   transition: 0.2s ease;
+}
+
+
+.box:hover {
+   background-color: rgb(255, 215, 215);
+   transform: rotate(-2deg);
+}
+
+
+.box a {
+   color: papayawhip;
+   text-decoration: none;
+   font-family: "Krub", sans-serif;
+   font-size: 1.2rem;
+   font-weight: 400;
+   font-style: normal;
+   line-height: 1.5;
+}
+
+
+p {
+   font-family: "Krub", sans-serif;
+   font-size: 1rem;
+   font-weight: 400;
+   font-style: normal;
+   line-height: 1.5;
+   letter-spacing: 0;
+   text-align: left;
+}
+
+
+.bodytext {
+   color: papayawhip;
+   font-family: "Krub", sans-serif;
+   font-size: 1rem;
+   font-weight: 400;
+   font-style: normal;
+line-height: 1.5;
+   margin: 30px 5%;
+   text-align: left;
+}
+
+
+h1 {
+   color: rgb(163, 33, 77);
+   font-family: "Krub", sans-serif;
+   font-size: var(--fs-lg);
+   font-weight: 400;
+   line-height: 1.2;
+}
+
+
+h2 {
+   color: rgb(163, 33, 77);
+   font-family: "Krub", sans-serif;
+   font-size: var(--fs-md);
+   font-weight: 400;
+   line-height: 1.2;
+}
+
+
+h3 {
+   color: rgb(163, 33, 77);
+   font-family: "Krub", sans-serif;
+   font-size: var(--fs-sm);
+   font-weight: 400;
+   line-height: 1.2;
+}
+
+
+.header {
+   background: rgb(241, 200, 200);
+   padding: 10px 5%;
+   color: papayawhip;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 30px;
+   font-family: "Krub", sans-serif;
+flex-direction: row;
+   flex-wrap: nowrap;
+}
+
+
+.header a:hover,
+.box a:hover {
+   color: rgb(235, 40, 122);
+}
+
+
+@media (max-width: 700px) {
+   .header {
+       flex-direction: column;
+       text-align: center;
+   }
+
+
+   #biggest {
+       font-size: clamp(4rem, 18vw, 7rem);
+   }
+
+
+   nav {
+       justify-content: center;
+       gap: 15px;
+   }
+
+
+   .container {
+       flex-direction: column;
+   }
+
+
+   .box {
+       padding: 2rem;
+   }
+}
