@@ -13,47 +13,11 @@ body {
 }
 
 
-.header {
-   background: rgb(241, 200, 200);
-   padding: 10px 20px;
-   color: papayawhip;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   margin-bottom: 30px;
-   font-family: "Krub", sans-serif;
-   flex-direction: row;
-   flex-wrap: nowrap;
-}
-
-
 .banner {
    display: flex;
    flex-direction: row;
    gap: 25px;
    align-items: center;
-}
-
-
-#biggest {
-   font-size: var(--fs-xl);
-   font-weight: bold;
-   font-family: "Lacquer", system-ui;
-   font-style: normal;
-   line-height: 1.1;
-   letter-spacing: 0;
-   color: rgb(201, 80, 120);
-   margin: 0;
-}
-
-
-.blue-paragraph {
-   color: rgb(214, 67, 104);
-   margin: 0;
-   text-align: left;
-   font-family: "Krub", sans-serif;
-   font-size: 1rem;
-  line-height: 1.5;
 }
 
 
@@ -64,13 +28,15 @@ nav {
    flex-wrap: wrap;
 }
 
-
-nav a {
-   color: papayawhip;
-   text-decoration: none;
-   font-family: "Krub", sans-serif;
-   font-size: 1rem;
-   font-weight: 400;
+#biggest {
+   font-size: var(--fs-xl);
+   font-weight: bold;
+   font-family: "Lacquer", system-ui;
+   font-style: normal;
+   line-height: 1.1;
+   letter-spacing: 0;
+   color: rgb(201, 80, 120);
+   margin: 0;
 }
 
 
@@ -110,7 +76,7 @@ img {
 
 
 .box a {
-   color: papayawhip;
+   color: rgb(211, 122, 128);
    text-decoration: none;
    font-family: "Krub", sans-serif;
    font-size: 1.2rem;
@@ -120,53 +86,48 @@ img {
 }
 
 
-p {
-   font-family: "Krub", sans-serif;
-   font-size: 1rem;
-   font-weight: 400;
-   font-style: normal;
-   line-height: 1.5;
-   letter-spacing: 0;
-   text-align: left;
-}
-
-
 .bodytext {
    color: papayawhip;
    font-family: "Krub", sans-serif;
    font-size: 1rem;
    font-weight: 400;
    font-style: normal;
-line-height: 1.5;
+   line-height: 1.5;
    margin: 30px 5%;
    text-align: left;
 }
 
 
-h1 {
-   color: rgb(163, 33, 77);
+.h1 {
+   color:rgb(193, 47, 96);
    font-family: "Krub", sans-serif;
    font-size: var(--fs-lg);
    font-weight: 400;
    line-height: 1.2;
+   margin: 30px 5%;
+   text-align: left;
 }
 
 
-h2 {
-   color: rgb(163, 33, 77);
+.h2 {
+   color: rgb(193, 47, 96);
    font-family: "Krub", sans-serif;
    font-size: var(--fs-md);
    font-weight: 400;
    line-height: 1.2;
+   margin: 30px 5%;
+   text-align: left;
 }
 
 
-h3 {
-   color: rgb(163, 33, 77);
+.h3 {
+   color:  rgb(193, 47, 96);
    font-family: "Krub", sans-serif;
    font-size: var(--fs-sm);
    font-weight: 400;
-   line-height: 1.2;
+   line-height: 1.5;
+   margin: 30px 5%;
+   text-align: left;
 }
 
 
@@ -178,8 +139,8 @@ h3 {
    justify-content: space-between;
    align-items: center;
    margin-bottom: 30px;
-   font-family: "Krub", sans-serif;
-flex-direction: row;
+
+   flex-direction: row;
    flex-wrap: nowrap;
 }
 
@@ -216,4 +177,15 @@ flex-direction: row;
    .box {
        padding: 2rem;
    }
+}
+
+div.scroll-container {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+div.scroll-container img {
+  padding: 10px;
 }
