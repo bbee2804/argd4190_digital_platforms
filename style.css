@@ -1,3 +1,4 @@
+@ -1,254 +1,291 @@
 :root {
    --fs-xl: clamp(4rem, 10vw, 9rem);
    --fs-lg: clamp(3rem, 7vw, 6rem);
@@ -289,6 +290,7 @@ img {
    border-radius: 15px;
    transition: 0.3s ease;
 }
+
 body {
   font-family: sans-serif;
   padding: 20px;
@@ -357,4 +359,18 @@ label {
 
 input {
   margin-bottom: 8px;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  background-color: #f8a9a9; /* Light pink background instead of light gray */
+}
+
+.controls {
+  background-color: #ffffff; /* Or change to another color like #fff0f5 */
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  width: 670px;
 }
