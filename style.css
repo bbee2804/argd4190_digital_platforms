@@ -289,3 +289,72 @@ img {
    border-radius: 15px;
    transition: 0.3s ease;
 }
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+#image-box {
+  position: relative;
+  display: inline-block;
+  width: 700px;
+  height: 500px;
+  background-color: #ddd;
+  overflow: hidden;
+}
+
+#dog {
+  width: 700px;
+  height: auto;
+}
+
+#dahlia {
+  position: absolute;
+  width: 150px;
+  top: 50px;
+  left: 250px;
+}
+
+#circle {
+  position: absolute;
+  width: 120px;
+  top: 150px;
+  left: 100px;
+}
+
+#pink {
+  position: absolute;
+  width: 120px;
+  top: 200px;
+  left: 400px;
+}
+
+#overlay-text {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.controls {
+  background-color: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  width: 670px;
+}
+
+label {
+  display: inline-block;
+  width: 140px;
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+input {
+  margin-bottom: 8px;
+}
