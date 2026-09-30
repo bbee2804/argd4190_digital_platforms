@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Collection</title>
+  <style>
+    /* Reset & Page Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Times New Roman", Times, Georgia, serif;
+      background-color: #ffffff;
+      color: #000000;
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+
+    /* Search & Filter Controls */
+    .controls {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .controls input, 
+    .controls select {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .controls input:focus, 
+    .controls select:focus {
+      border-color: #000;
+    }
+
+    /* Grid Layout */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    /* Individual Card Style */
+    .card {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .card-year {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    /* Image Container with Colored Background Options */
+    .card-image-container {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      background-color: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    /* Variant Background Colors like your pink card */
+    .card:nth-child(odd) .card-image-container {
+      background-color: #ffd2d9;
+    }
+    .card:nth-child(even) .card-image-container {
+      background-color: #eeeeee;
+    }
+
+    .card-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .placeholder-text {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .card-genre {
+      font-size: 1.1rem;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    /* Checkbox Indicator */
+    .card-checkbox {
+      width: 16px;
+      height: 16px;
+      accent-color: #1aae36;
+      cursor: pointer;
+    }
+
+    /* Modal Dialog Styling */
+    dialog {
+      margin: auto;
+      border: none;
+      border-radius: 8px;
+      padding: 24px;
+      max-width: 450px;
+      width: 90%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      font-family: Arial, sans-serif;
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content h2 {
+      font-family: "Times New Roman", Times, Georgia, serif;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .modal-content p {
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .modal-upload {
+      margin: 15px 0;
+      padding: 12px;
+      border: 1px dashed #aaa;
+      background-color: #fafafa;
+      border-radius: 4px;
+    }
+
+    .modal-upload label {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .close-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Books</h1>
+  </header>
+
+  <section class="controls">
+    <input type="text" id="searchInput" placeholder="Search title or author...">
+    
+    <select id="genreFilter">
+      <option value="ALL">All Genres</option>
+    </select>
+
+    <select id="ageFilter">
+      <option value="ALL">All Age Groups</option>
+    </select>
+
+    <select id="purposeFilter">
+      <option value="ALL">All Purposes</option>
+    </select>
+  </section>
+
+  <main class="collection-grid" id="collectionContainer"></main>
+
+  <dialog id="itemModal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Book Title</h2>
+      <p id="modalAuthor"></p>
+      <p id="modalGenre"></p>
+      <p id="modalAudience"></p>
+      <p id="modalPurpose"></p>
+
+      <div class="modal-upload">
+        <label for="imageUploader">📷 Add Cover Photo:</label>
+        <input type="file" id="imageUploader" accept="image/*">
+      </div>
+
+      <button class="close-btn" id="closeModalBtn">Close</button>
+    </div>
+  </dialog>
+
+  <script>
+    const userUploadedPhotos = {};
+    let collectionData = [];
+    let selectedItemIndex = null;
+
+    const container = document.getElementById('collectionContainer');
+    const searchInput = document.getElementById('searchInput');
+    const genreFilter = document.getElementById('genreFilter');
+    const ageFilter = document.getElementById('ageFilter');
+    const purposeFilter = document.getElementById('purposeFilter');
+    
+    const modal = document.getElementById('itemModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalAuthor = document.getElementById('modalAuthor');
+    const modalGenre = document.getElementById('modalGenre');
+    const modalAudience = document.getElementById('modalAudience');
+    const modalPurpose = document.getElementById('modalPurpose');
+    const imageUploader = document.getElementById('imageUploader');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    async function loadCollection() {
+      try {
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error('data.json file not found');
+        collectionData = await response.json();
+      } catch (err) {
+        console.warn('Could not load data.json directly, using fallback dataset:', err);
+        // Default fallback array based on your list
+        collectionData = [
+          { title: "Butterfly People", author: "William Leach", genre: "Science History", purpose: "Novel", agedemographic: "Adults" },
+          { title: "The Borrowers", author: "Mary Norton", genre: "Fantasy", purpose: "Novel", agedemographic: "Kids" },
+          { title: "The Girl Who Drank the Moon", author: "Kelly Barnhill", genre: "Fantasy", purpose: "Novel", agedemographic: "Kids" },
+          { title: "You Are a Badass", author: "Jen Sincero", genre: "Self Help", purpose: "Novel", agedemographic: "Adults" },
+          { title: "Anxious People", author: "Frederick Backman", genre: "Psychological Fiction", purpose: "Novel", agedemographic: "Adults" },
+          { title: "Esther", author: "Charles Swindoli", genre: "Religious", purpose: "Novel", agedemographic: "Adults" },
+          { title: "Cuckoo", author: "Nick Davies", genre: "Biology", purpose: "Novel", agedemographic: "Adults" },
+          { title: "The Life Changing Magic of Tidying Up", author: "Marie Kondo", genre: "Self Help", purpose: "Novel", agedemographic: "Adults" }
+        ];
+      }
+
+      populateFilterDropdowns();
+      renderCollection(collectionData);
+    }
+
+    function populateFilterDropdowns() {
+      const genres = [...new Set(collectionData.map(item => item.genre.trim()))];
+      const ages = [...new Set(collectionData.map(item => item.agedemographic.trim()))];
+      const purposes = [...new Set(collectionData.map(item => item.purpose.trim()))];
+
+      genres.forEach(g => genreFilter.innerHTML += `<option value="${g}">${g}</option>`);
+      ages.forEach(a => ageFilter.innerHTML += `<option value="${a}">${a}</option>`);
+      purposes.forEach(p => purposeFilter.innerHTML += `<option value="${p}">${p}</option>`);
+    }
+
+    function renderCollection(items) {
+      container.innerHTML = '';
+
+      if (items.length === 0) {
+        container.innerHTML = '<p style="font-family: Arial; color: #888;">No matching books found.</p>';
+        return;
+      }
+
+      items.forEach((item, index) => {
+        const originalIndex = collectionData.indexOf(item);
+        const card = document.createElement('article');
+        card.className = 'card';
+        
+        // Use custom uploaded image if available, else standard placeholder
+        const customImg = userUploadedPhotos[originalIndex];
+
+        card.innerHTML = `
+          <div class="card-title">${item.title}</div>
+          <div class="card-year">${item.author}</div>
+          <div class="card-image-container">
+            ${customImg 
+              ? `<img src="${customImg}" alt="${item.title}">` 
+              : `<span class="placeholder-text">[ + Click card to add photo ]</span>`
+            }
+          </div>
+          <div class="card-genre">${item.genre}</div>
+          <div>
+            <input type="checkbox" class="card-checkbox" checked onclick="event.stopPropagation();">
+          </div>
+        `;
+
+        card.addEventListener('click', () => openModal(originalIndex));
+        container.appendChild(card);
+      });
+    }
+
+    function filterItems() {
+      const query = searchInput.value.toLowerCase();
+      const selectedGenre = genreFilter.value;
+      const selectedAge = ageFilter.value;
+      const selectedPurpose = purposeFilter.value;
+
+      const filtered = collectionData.filter(item => {
+        const matchesSearch = item.title.toLowerCase().includes(query) || item.author.toLowerCase().includes(query);
+        const matchesGenre = selectedGenre === 'ALL' || item.genre.trim() === selectedGenre;
+        const matchesAge = selectedAge === 'ALL' || item.agedemographic.trim() === selectedAge;
+        const matchesPurpose = selectedPurpose === 'ALL' || item.purpose.trim() === selectedPurpose;
+
+        return matchesSearch && matchesGenre && matchesAge && matchesPurpose;
+      });
+
+      renderCollection(filtered);
+    }
+
+    function openModal(index) {
+      selectedItemIndex = index;
+      const item = collectionData[index];
+
+      modalTitle.textContent = item.title;
+      modalAuthor.textContent = `Author: ${item.author}`;
+      modalGenre.textContent = `Genre: ${item.genre}`;
+      modalAudience.textContent = `Audience: ${item.agedemographic}`;
+      modalPurpose.textContent = `Purpose: ${item.purpose}`;
+
+      imageUploader.value = '';
+      modal.showModal();
+    }
+
+    closeModalBtn.addEventListener('click', () => modal.close());
+
+    imageUploader.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && selectedItemIndex !== null) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          userUploadedPhotos[selectedItemIndex] = evt.target.result;
+          filterItems(); // Refresh display
+          modal.close();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    searchInput.addEventListener('input', filterItems);
+    genreFilter.addEventListener('change', filterItems);
+    ageFilter.addEventListener('change', filterItems);
+    purposeFilter.addEventListener('change', filterItems);
+
+    loadCollection();
+  </script>
+</body>
+</html>
