@@ -1,4 +1,3 @@
-@ -1,254 +1,291 @@
 :root {
    --fs-xl: clamp(4rem, 10vw, 9rem);
    --fs-lg: clamp(3rem, 7vw, 6rem);
