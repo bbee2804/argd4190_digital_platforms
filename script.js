@@ -81,16 +81,5 @@ document.addEventListener("DOMContentLoaded", function () {
   updatePink();
 });
 
-let person = {
-  firstName: "John"
-  lastName: "Doe"
-  age: 50,
-  address: {
-    street: "123 main street"
-    city: new york
-    zip: 10001
-  }
-  hobbies: ["dancing", "cooking, "singing"]
-}
 
 console.log(person.hobbies[3])
