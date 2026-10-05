@@ -86,44 +86,69 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-/* =========================================================
-   LIBRARY COLLECTION CODE
-   ========================================================= */
-
 let allBooks = [];
-let bookGrid = document.getElementById("bookGrid");
-let genreSelect = document.getElementById("genreSelect");
 
-fetch("library.json")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    allBooks = data;
-    
-    // Populate dropdown options cleanly
-    let genres = [];
-    for (let i = 0; i < allBooks.length; i++) {
-      let genre = allBooks[i].genre.trim();
-      if (!genres.includes(genre)) {
-        genres.push(genre);
-        let option = document.createElement("option");
-        option.value = genre;
-        option.textContent = genre;
-        if (genreSelect) genreSelect.appendChild(option);
+function initLibrary() {
+  let bookGrid = document.getElementById("bookGrid");
+  let genreSelect = document.getElementById("genreSelect");
+
+  if (!bookGrid) return;
+
+  fetch("library.json")
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not fetch library.json");
       }
-    }
+      return response.json();
+    })
+    .then(function (data) {
+      allBooks = data;
 
-    displayBooks(allBooks);
-  })
-  .catch(function (error) {
-    if (bookGrid) {
-      bookGrid.innerHTML = "<p>Could not load library.json</p>";
-    }
-  });
+      if (genreSelect) {
+        genreSelect.innerHTML = '<option value="all">All Genres</option>';
+        let genres = [];
+
+        for (let i = 0; i < allBooks.length; i++) {
+          if (allBooks[i].genre) {
+            let genre = allBooks[i].genre.trim();
+            if (!genres.includes(genre)) {
+              genres.push(genre);
+              let option = document.createElement("option");
+              option.value = genre;
+              option.textContent = genre;
+              genreSelect.appendChild(option);
+            }
+          }
+        }
+
+        genreSelect.addEventListener("change", function () {
+          let selectedGenre = genreSelect.value;
+          if (selectedGenre === "all") {
+            displayBooks(allBooks);
+          } else {
+            let filtered = [];
+            for (let i = 0; i < allBooks.length; i++) {
+              if (allBooks[i].genre && allBooks[i].genre.trim() === selectedGenre) {
+                filtered.push(allBooks[i]);
+              }
+            }
+            displayBooks(filtered);
+          }
+        });
+      }
+
+      displayBooks(allBooks);
+    })
+    .catch(function (error) {
+      console.error("Error loading library:", error);
+      bookGrid.innerHTML = "<p>Could not load library.json. Make sure you are using Live Server!</p>";
+    });
+}
 
 function displayBooks(books) {
+  let bookGrid = document.getElementById("bookGrid");
   if (!bookGrid) return;
+
   bookGrid.innerHTML = "";
 
   for (let i = 0; i < books.length; i++) {
@@ -138,4 +163,10 @@ function displayBooks(books) {
       '<div class="card-title">' + book.title + '</div>' +
       '<div class="card-author">' + book.author + '</div>' +
       '<img class="card-image" src="' + book.local_image + '" alt="' + altText + '">' +
-      '<div class="card
+      '<div class="card-genre">' + book.genre + '</div>';
+
+    bookGrid.appendChild(card);
+  }
+}
+
+initLibrary();
