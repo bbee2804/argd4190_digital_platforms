@@ -1,79 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
+
 <head>
-  <meta charset="UTF-8">
-  <title>make the puppy pretty!</title>
-  <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://use.typekit.net/ijc3kcd.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Lacquer&display=swap" rel="stylesheet">
+
+   <link rel="stylesheet" href="reset.css">
+   <link rel="stylesheet" href="style.css">
 </head>
+
+
 <body>
+<header>
+    <div class="header"> <p id="biggest">socials❀ </p> </div>
+      <img src="assets/long pink lace top down.png"
+                  alt="Pink lace decoration following the header, with the flat edge at the top and the intricate one at the bottom">
 
-  <div id="image-box">
-    <img id="dog" src="assets/dog.jpg" alt="happy puppy with tongue halfway sticking out">
-    
-    <img id="dahlia" src="assets/dahlia.png" alt="dahlia/orange flower image">
-    <img id="circle" src="assets/circle.png" alt="circle image">
-    <img id="pink" src="assets/pink.png" alt="pink image">
-    
-    <p id="overlay-text">puppy</p>
-  </div>
 
-  <div class="controls">
-    <h3>transform puppy</h3>
-    <label>Rotate:</label>
-    <input id="rotate" type="range" min="-180" max="180" value="0">
 
-    <label>Skew X:</label>
-    <input id="skewX" type="range" min="-45" max="45" value="0">
+<div class="center">
+   <button onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=maperry004@gmail.com', '_blank')">
+   email
+</button>
+   <button onclick="window.location.href='https://www.instagram.com/_minifay_/'">instagram</button>
+   <button onclick="window.location.href='https://x.com/minifay_'">twitter</button>
 
-    <label>Skew Y:</label>
-    <input id="skewY" type="range" min="-45" max="45" value="0">
 
-    <label>Scale:</label>
-    <input id="scale" type="range" min="0.5" max="2" step="0.1" value="1">
+      <img src="assets/long pink lace bottom up.png"
+                  alt="Pink lace decoration following the header, with the flat edge at the bottom and the intricate one at the top">
 
-    <hr>
+</div>
 
-    <h3>text</h3>
-    <label>Text:</label>
-    <input id="textInput" type="text" value="puppy">
+<div class="container">
+       <nav>
+   <div class="box"><a href="index.html"> home page </a></div>
+   <div class="box"><a href="commissions.html"> commissions </a></div>
+   <div class="box"><a href="mywork.html"> my work </a></div>
+   <div class="box"><a href="inspirations.html"> inspirations </a></div>
+      </nav>
+   </div>
 
-    <label>Color:</label>
-    <input id="textColor" type="color" value="#ffffff">
-
-    <label>Text X Position:</label>
-    <input id="textX" type="range" min="0" max="500" value="30">
-
-    <label>Text Y Position:</label>
-    <input id="textY" type="range" min="0" max="400" value="30">
-
-    <hr>
-
-    <h3>transform flower</h3>
-    <label>Dahlia X Position:</label>
-    <input id="dahliaX" type="range" min="0" max="500" value="250">
-
-    <label>Dahlia Y Position:</label>
-    <input id="dahliaY" type="range" min="0" max="400" value="50">
-
-    <hr>
-
-    <h3>transform circle</h3>
-    <label>Circle X Position:</label>
-    <input id="circleX" type="range" min="0" max="500" value="100">
-
-    <label>Circle Y Position:</label>
-    <input id="circleY" type="range" min="0" max="400" value="150">
-
-    <hr>
-
-    <h3>transform pink</h3>
-    <label>Pink X Position:</label>
-    <input id="pinkX" type="range" min="0" max="500" value="400">
-
-    <label>Pink Y Position:</label>
-    <input id="pinkY" type="range" min="0" max="400" value="200">
-  </div>
-
-  <script src="script.js"></script>
 </body>
-</html>
